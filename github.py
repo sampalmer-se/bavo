@@ -5,9 +5,19 @@ import requests
 class GitHub(object):
 
     def __init__(self):
-        self.token = os.environ("GITHUB_TOKEN")
+        self.base_url = "https://api.github.com/repos/sampalmer-se/bavo"
+        self.token_suffix = "?access_token={}".format(os.environ("GITHUB_TOKEN"))
 
     def merge_pull_request(self, pull_request_id):
-        url = "https://api.github.com/repos/sampalmer-se/bavo/pulls/{}/merge?access_token={}".format(pull_request_id,
-                                                                                                     self.token)
+        url = "{}/pulls/{}/merge{}".format(self.base_url, pull_request_id, self.token_suffix)
         requests.put(url)
+
+    def merge_master_into_branch(self, branch_name):
+        url = "{}/merges{}".format(self.base_url, self.token_suffix)
+        data = {
+            "base": branch_name,
+            "head": "master",
+            "commit_message": "Merge master into {}".format(branch_name)
+        }
+        requests.post(url, json=data)
+
