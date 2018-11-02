@@ -1,3 +1,3 @@
 FROM alpine
 RUN apk update
-RUN apk install git
+RUN apk add git
