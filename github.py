@@ -10,7 +10,10 @@ class GitHub(object):
 
     def merge_pull_request(self, pull_request_id):
         url = "{}/pulls/{}/merge{}".format(self.base_url, pull_request_id, self.token_suffix)
-        requests.put(url)
+        data = {
+            "merge_method" : "squash"
+        }
+        requests.put(url, data)
 
     def merge_master_into_branch(self, branch_name):
         url = "{}/merges{}".format(self.base_url, self.token_suffix)
