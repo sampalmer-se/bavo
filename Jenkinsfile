@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    docker { image 'alpine/git' }
+    docker { dockerfile true }
   }
   stages {
     stage('Checkout') {
