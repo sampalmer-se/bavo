@@ -1,0 +1,2 @@
+create table authed_teams (team_id varchar(255) primary key, token);
+create table front_end_queue (user_id varchar(255), team_id varchar(255), branch_name varchar(255), pull_request_id varchar(5), cauldron_version varchar(20), added timestamp);
